@@ -20,6 +20,7 @@
 
 using std::string;
 using std::vector;
+using std::normal_distribution;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
   /**
@@ -30,8 +31,26 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
    * NOTE: Consult particle_filter.h for more information about this method 
    *   (and others in this file).
    */
-  num_particles = 0;  // TODO: Set the number of particles
-
+  std::default_random_engine gen;
+  normal_distribution<double> noise_x(0.0, std[0]);
+  normal_distribution<double> noise_y(0.0, std[1]);
+  normal_distribution<double> noise_theta(0.0, std[2]);
+  num_particles = 1;  // TODO: Set the number of particles
+ 
+  for(int i=0;i<num_particles;++i){
+    Particle p = Particle();
+    p.id = i;
+    p.x = x;
+    p.y = y;
+    p.theta = theta;
+    p.weight = 1;
+    
+    p.x += noise_x(gen);
+    p.y += noise_y(gen);
+    p.theta += noise_theta(gen);
+    
+    particles.push_back(p);
+  }
 }
 
 void ParticleFilter::prediction(double delta_t, double std_pos[], 
