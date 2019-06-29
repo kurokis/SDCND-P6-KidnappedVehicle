@@ -37,7 +37,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
   normal_distribution<double> noise_x(0.0, std[0]);
   normal_distribution<double> noise_y(0.0, std[1]);
   normal_distribution<double> noise_theta(0.0, std[2]);
-  num_particles = 1;  // TODO: Set the number of particles
+  num_particles = 100;  // TODO: Set the number of particles
  
   for(int i=0;i<num_particles;++i){
     Particle p = Particle();
