@@ -173,19 +173,14 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
           p = predictions[k];
         }
       }
-      
-      //std::cout <<"m:"<<m.id <<","<<m.x<<","<<m.y<< " p:"<<p.id<<","<<p.x<<","<<p.y<<std::endl;
-      
+       
       double s_x = std_landmark[0];
       double s_y = std_landmark[1];
       
       double f = pow(m.x-p.x,2)/(2.0*pow(s_x,2))+pow(m.y-p.y,2)/(2.0*pow(s_y,2));
       double normalizer = 1.0/(2.0*M_PI*s_x*s_y);
-      //std::cout <<   f << " " << std::endl;
       particles[i].weight *= normalizer*exp(-f);                                                          
     }
-    //std::cout << std::endl;
-
   }
 }
 

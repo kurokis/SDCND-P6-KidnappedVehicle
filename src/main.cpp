@@ -109,11 +109,6 @@ int main() {
 
           // Update the weights and resample
           pf.updateWeights(sensor_range, sigma_landmark, noisy_observations, map);
-          
-          // debug
-          //for (int i = 0; i < pf.particles.size(); ++i) {
-          //  std::cout << "p" << i << "=" << pf.particles[i].weight << std::endl;
-          //}
           pf.resample();
 
           // Calculate and output the average weighted error of the particle 
@@ -124,7 +119,6 @@ int main() {
           Particle best_particle;
           double weight_sum = 0.0;
           for (int i = 0; i < num_particles; ++i) {
-            //std::cout << "p" << i << "=" << particles[i].weight << std::endl;
             if (particles[i].weight > highest_weight) {
               highest_weight = particles[i].weight;
               best_particle = particles[i];
